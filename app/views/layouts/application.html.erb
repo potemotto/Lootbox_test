@@ -23,6 +23,18 @@
   </head>
 
   <body>
+    <% flash.each do |key, message| %>
+    <div class="flash <%= key %>">
+      <%= message %>
+    </div>
+    <% end %>
+
+    <% if admin_signed_in? %>
+      <%= button_to "ログアウト", destroy_admin_session_path,
+        method: :delete,
+        data: { turbo_confirm: "本当にログアウトしますか？" } %>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>
